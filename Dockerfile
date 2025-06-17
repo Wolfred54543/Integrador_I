@@ -1,5 +1,5 @@
-# Usa una imagen base de OpenJDK
-FROM openjdk:17-jre-slim
+# Usa una imagen base de OpenJDK 17
+FROM openjdk:17-slim
 
 # Crea un volumen temporal
 VOLUME /tmp
