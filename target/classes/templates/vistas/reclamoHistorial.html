@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Reclamos</title>
+</head>
+<body>
+    <h1>Historial de Reclamos</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Motivo</th>
+                <th>Descripción</th>
+                <th>Solicitud</th>
+            </tr>
+        </thead>
+        <tbody>
+            <th:block th:each="reclamo : ${reclamos}">
+                <tr>
+                    <td th:text="${reclamo.recId}"></td>
+                    <td th:text="${reclamo.recMotivo}"></td>
+                    <td th:text="${reclamo.recDescripcion}"></td>
+                    <td th:text="${reclamo.recSolicitud}"></td>
+                </tr>
+            </th:block>
+        </tbody>
+    </table>
+
+    <a href="/reclamoFormulario">Volver al formulario</a>
+</body>
+</html>

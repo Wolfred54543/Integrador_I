@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Licenciado</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Registro de Licenciado</h1>
+    <form action="#" th:action="@{/registrolicenciado}" th:object="${licenciado}" method="post">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" th:field="*{licNombre}" required>
+        <label for="nombre">Apellido:</label>
+        <input type="text" id="nombre" th:field="*{licApellido}" required>
+
+
+        <label for="tipo">Tipo:</label>
+        <select id="tipo" name="tipoId" required>
+            <option th:each="tipo : ${tipos}" th:value="${tipo.tipoId}" th:text="${tipo.tipoNombre}"></option>
+        </select>
+
+        <label for="decada">Decada:</label>
+        <select id="decada" name="decId" required>
+            <option th:each="decada : ${decadas}" th:value="${decada.decId}" th:text="${decada.anioInicio}"></option>
+        </select>
+        
+        <button type="submit">Registrar</button>
+    </form>
+
+    <h2>Lista de Licenciados</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Tipo</th>
+                <th>Decada</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="licenciado : ${licenciados}">
+                <td th:text="${licenciado.licNombre != null ? licenciado.licNombre : 'Sin Nombre'}">Nombre</td>
+                <td th:text="${licenciado.licApellido != null ? licenciado.licApellido : 'Sin Apellido'}">Apellido</td>
+                <td th:text="${licenciado.tipo != null ? licenciado.tipo.tipoNombre : 'Sin Tipo'}">Tipo</td>
+                <td th:text="${licenciado.decada != null ? licenciado.decada.anioInicio : 'Sin Década'}">Década</td>
+                <td>
+                <form th:action="@{/eliminarlicenciado/{id}(id=${licenciado.licId})}" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este licenciado?');">
+                    <button type="submit">Eliminar</button>
+                </form>
+                    <a th:href="@{/editarlicenciado/{id}(id=${licenciado.licId})}">Editar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/registrolicenciado">Registrar nuevo Licenciado</a>
+</body>
+</html>

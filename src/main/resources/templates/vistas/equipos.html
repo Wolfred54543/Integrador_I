@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{componentes/head :: head}"></head>
+<body>
+    <header th:replace="~{componentes/header :: header}"></header>
+ <!-- Contenido principal -->
+    <div class="container">
+        <div class="header-actions">
+            <h2>Equipos</h2>
+            <button class="btn-add" onclick="openModal()">Agregar <span>+</span></button>
+        </div>
+        
+        <!-- Barra de búsqueda -->
+        <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Buscar Equipo">
+        </div>
+        
+        <!-- Tabla de usuarios -->
+        <div class="table-container">
+  <table>
+        <thead>
+            <tr>
+                <th>Nro</th>
+                <th>Nombre del Equipo</th>
+                <th>Descripcion</th>
+                <th>Logo</th>
+            </tr>
+        </thead>
+        <tbody>
+                 <tr th:each="equipo, iterStat : ${equipos}">
+                    <td th:text="${iterStat.index + 1}">1</td>
+                    <td th:text="${equipo.equNombre != null ? equipo.equNombre : 'Sin nombre'}">Nombre</td>
+                    <td th:text="${equipo.equDescripcion!= null ? equipo.equDescripcion : 'Sin descripcion'}">Descripcion</td>
+                    <td><img th:src="@{/imagenes/imgLogoEquipos/{nombreLogo}(nombreLogo=${equipo.equLogo})}" alt="Logo del Equipo" class="img_logo_equipo"/></td>
+                    <!-- <td th:text="${licenciado.licTelefono != null ? licenciado.licTelefono : 'Sin Telefono'}">Telefono</td>
+                    <td th:text="${licenciado.licCorreo != null ? licenciado.licCorreo : 'Sin Correo'}">Correo</td>
+                    <td th:text="${licenciado.licFechaNacimiento != null ? licenciado.licFechaNacimiento : 'Sin Fecha de Nacimiento'}">Fecha de Nacimiento</td>
+                    <td th:text="${licenciado.decada != null ? licenciado.decada.anioInicio : 'Sin Década'}">Década</td>
+                    <td th:text="${licenciado.tipo != null ? licenciado.tipo.tipoNombre : 'Sin Tipo'}">Tipo</td> -->
+                    <!-- <td class="actions">
+                    <form th:action="@{/eliminarlicenciado/{id}(id=${licenciado.licId})}" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este licenciado?');">
+                    <button class="btn-delete" type="submit">🗑️</button>
+                    </form>
+                         <a th:href="@{/editarlicenciado/{id}(id=${licenciado.licId})}">✏️</a>
+                    </td> -->
+                </tr> 
+        </tbody>
+    </table>
+        </div>
+        
+        <!-- Paginación -->
+        <div class="pagination">
+            <button>&lt;</button>
+            <button class="active">1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>...</button>
+            <button>8</button>
+            <button>9</button>
+            <button>10</button>
+            <button>&gt;</button>
+        </div>
+    </div>
+    
+    <div class="modal" id="registroModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Registrar Nuevo Equipo</h2>
+            </div>
+            <form action="#" th:action="@{/registrarEquipos}" th:object="${equipo}" method="post">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="nombre">Nombre del Equipo:</label>
+                        <input type="text" id="nombre" th:field="*{equNombre}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Descripcion del Equipo:</label>
+                        <input type="text" id="apellido" th:field="*{equDescripcion}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="logo">Logo del Equipo:</label>
+                        <input type="file" id="" th:field="*{equLogo}" required>
+                    </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn-primary" onclick="submitForm()">Añadir</button>
+                    <button type="button" class="btn-secondary" onclick="closeModal()">Anular</button>
+                </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('registroModal').style.display = 'block';
+        }
+        
+        function closeModal() {
+            document.getElementById('registroModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

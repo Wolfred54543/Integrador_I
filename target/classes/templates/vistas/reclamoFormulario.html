@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a th:href="@{/reclamoHistorial}">Ver historial</a>
+    <h1>Formulario de reclamo</h1>
+        <form th:action="@{/reclamoFormulario}" method="post">
+            <label for="motivo">Motivo*</label>
+            <input type="text" id="" placeholder="Ingresa el motivo" name="motivo" autocomplete="off" required />
+
+            <label for="descripcion">Descripcion*</label>
+            <textarea type="text" id="" placeholder="Ingresa la descripcion" name="descripcion" autocomplete="off" required></textarea>
+
+            <label for="solicitud">Solicitud*</label>
+            <textarea type="text" id="" placeholder="Ingresa la solicitud" name="solicitud" autocomplete="off" required></textarea>
+            
+
+            <button type="submit" class="btn-principal">Enviar Reclamo</button>
+            
+            <div th:if="${mensaje}" class="mensaje-exito">
+                <p th:text="${mensaje}"></p>
+            </div>
+
+            <div th:if="${error}" class="mensaje-error">
+                <p th:text="${error}"></p>
+        </div>
+
+</body>
+</html>
