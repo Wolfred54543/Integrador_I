@@ -25,4 +25,8 @@ ENV SPRING_DATASOURCE_USERNAME=root
 ENV SPRING_DATASOURCE_PASSWORD=CtJ6Id51uWAmQ5gg84hLQ4rxg3Lng3LW
 
 # Comando para ejecutar tu aplicación
+<<<<<<< HEAD
 ENTRYPOINT ["java", "-jar", "/app.jar"]
+=======
+ENTRYPOINT ["java", "-jar", "/app.jar"]
+>>>>>>> ef9bddf8409e557aa341eacfd0dc56a77525dea3
